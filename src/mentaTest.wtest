@@ -1,0 +1,64 @@
+import plantas.*
+import parcelas.*
+
+describe "test plantas de menta" {
+
+	var plantaMenta = new Menta(altura = 1, anioDeObtencion = 2017)
+	var plantaMenta2 = new Menta(altura = 0.3, anioDeObtencion = 2017)
+	var plantaQuinoa = new Quinoa(cantDeHorasDeSol = 12, anioDeObtencion = 2010, altura = 1)
+	var plantaQuinoa2 = new Quinoa(cantDeHorasDeSol = 9, anioDeObtencion = 2001, altura = 1)
+	var plantaSoja = new Soja(altura = 0.6, anioDeObtencion = 2009)
+	var plantaSoja2 = new Soja(altura= 1.2, anioDeObtencion=2010)
+	var plantaSojaTr = new SojaTransgenica(altura = 1.2, anioDeObtencion = 2017)
+	var parcelaUnq = new Parcela(ancho = 20, largo = 1, horasDeSolAlDia = 8)
+
+	test " planta de menta da semilla" {
+		assert.equals(true, plantaMenta.daNuevasSemillas())
+	}
+
+	test "planta de menta ocupa 0.9 mentros" {
+		assert.equals(0.9, plantaMenta2.espacioQueOcupaEnMetros())
+	}
+
+	test "planta de quinoa da semilla" {
+		assert.equals(true, plantaQuinoa.daNuevasSemillas())
+	}
+
+	test "planta de quinoa2 da semilla" {
+		assert.equals(true, plantaQuinoa2.daNuevasSemillas())
+	}
+
+	test "planta de soja 7 horas de tolerancia, no da semillas y ocupa 0.3 metros" {
+		assert.equals(7, plantaSoja.horasDeToleranciaAlSol())
+		assert.equals(false, plantaSoja.daNuevasSemillas())
+		assert.equals(0.3, plantaSoja.espacioQueOcupaEnMetros())
+	}
+
+	test "planta sojaTransgenica no da semilla" {
+		assert.equals(false, plantaSojaTr.daNuevasSemillas())
+	}
+
+	test "parcela tiene superfice de 20 y cant maxima de plantas es 4" {
+		assert.equals(20, parcelaUnq.superficie())
+		assert.equals(4,parcelaUnq.cantMaximaDePlantas())
+	}
+	test "plantamos 4 plantas de soja y no da complicaciones"{
+		parcelaUnq.poderPlantarUnaPlanta(plantaSoja2)
+		parcelaUnq.poderPlantarUnaPlanta(plantaSoja2)
+		parcelaUnq.poderPlantarUnaPlanta(plantaSoja2)
+		parcelaUnq.poderPlantarUnaPlanta(plantaSoja2)
+		assert.equals(false,parcelaUnq.tieneComplicaciones())
+		
+	}
+	test "a parcelaUnq plantamos 5 plantas de soja y nos da complicaciones"{
+		parcelaUnq.poderPlantarUnaPlanta(plantaSoja2)
+		parcelaUnq.poderPlantarUnaPlanta(plantaSoja2)
+		parcelaUnq.poderPlantarUnaPlanta(plantaSoja2)
+		parcelaUnq.poderPlantarUnaPlanta(plantaSoja2)
+		parcelaUnq.poderPlantarUnaPlanta(plantaSoja2)
+		assert.equals(true,parcelaUnq.tieneComplicaciones())
+	}
+	
+	
+}
+
