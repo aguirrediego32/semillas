@@ -56,7 +56,7 @@ describe "test plantas de menta" {
 		parcelaUnq.poderPlantarUnaPlanta(plantaSoja2)
 		parcelaUnq.poderPlantarUnaPlanta(plantaSoja2)
 		parcelaUnq.poderPlantarUnaPlanta(plantaSoja2)
-		assert.equals(true,parcelaUnq.tieneComplicaciones())
+		assert.equals(("se supero el limite o no es una planta apta"),parcelaUnq.tieneComplicaciones())
 	}
 	
 	
